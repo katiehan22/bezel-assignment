@@ -1,6 +1,12 @@
+import NavBar from "./components/NavBar/NavBar";
+import ProductPage from "./components/ProductPage/ProductPage";
+
 function App() {
   return (
-    <h1>Hello from App</h1>
+    <>
+      <NavBar />
+      <ProductPage />
+    </>
   );
 }
 

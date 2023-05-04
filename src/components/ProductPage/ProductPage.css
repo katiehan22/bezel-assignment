@@ -1,0 +1,115 @@
+.product-page {
+  display: flex;
+  justify-content: center;
+}
+
+.product-page-left {
+  width: 400px;
+  padding: 30px;
+}
+
+.product-page-right {
+  /* width: 30%; */
+  width: 450px;
+  padding: 30px;
+}
+
+.product-images {
+  width: 100%;
+}
+
+.breadcrumbs {
+  color: gray;
+  margin-bottom: 15px;
+  display: flex;
+}
+
+.breadcrumb1 {
+  text-decoration: underline;
+}
+
+.product-name {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.product-price {
+  color: #1d7d67;
+  font-size: 25px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.product-highlights {
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  height: 75px;
+  margin-bottom: 20px;
+}
+
+.highlight-item {
+  margin: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.highlight-title {
+  color: gray;
+  font-size: 15px;
+}
+
+.highlight-detail {
+  font-size: 15px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.button {
+  height: 55px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.accept {
+  background-color: #1a3a32;
+  color: white;
+}
+
+.accept:hover {
+  background-color: #122a24;
+}
+
+.reject {
+  background-color: white;
+  border: 1px solid #122a24;
+}
+
+.reject:hover {
+  background-color: orange;
+  border: 1px solid orange;
+}
+
+.spotlight-item {
+  margin-bottom: 20px;
+}
+
+.spotlight-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.spotlight-details {
+  color: gray;
+}
