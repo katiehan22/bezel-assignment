@@ -9,7 +9,6 @@
 }
 
 .product-page-right {
-  /* width: 30%; */
   width: 450px;
   padding: 30px;
 }
@@ -79,6 +78,14 @@
   font-weight: bold;
   border: none;
   cursor: pointer;
+}
+
+.button:disabled,
+.button:disabled:hover{
+  background-color: gray;
+  color: white;
+  cursor: not-allowed;
+  border: none;
 }
 
 .accept {

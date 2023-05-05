@@ -1,7 +1,3 @@
-.action-form {
-  /* display: flex; */
-}
-
 .row-1 {
   display: flex;
   justify-content: flex-end;
@@ -126,8 +122,3 @@
   text-decoration: underline;
   cursor: pointer;
 }
-
-/* .confirmation {
-  color: red;
-  text-align: center;
-} */

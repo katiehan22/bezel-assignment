@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './ActionForm.css';
 
-const ActionForm = ({ setShowActionModal, productData, confirmation, handleClick }) => {
+const ActionForm = ({ setShowActionModal, productData, confirmation, handleClick, isDisabled, setIsDisabled }) => {
 
   return (
     <>
@@ -23,8 +23,8 @@ const ActionForm = ({ setShowActionModal, productData, confirmation, handleClick
               </div>
             </div>
             <div className='modal-left-bottom'>
-              <button className='button accept' onClick={() => handleClick('accept')}>Accept Sale</button>
-              <button className='button reject' onClick={() => handleClick('reject')}>Reject Sale</button>
+              <button className='button accept' onClick={() => handleClick('accept')} disabled={isDisabled}>Accept Sale</button>
+              <button className='button reject' onClick={() => handleClick('reject')} disabled={isDisabled}>Reject Sale</button>
               <div className='confirmation'>
                 {confirmation}
               </div>

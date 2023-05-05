@@ -5,7 +5,9 @@ import ActionModal from '../ActionModal';
 const ProductPage = () => {
   const [productData, setProductData] = useState([]);
   const [confirmation, setConfirmation] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
 
+  // Fetch product data
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetch("https://eb863a74-7a4e-4daf-9540-d2db8470c18e.mock.pstmn.io/marketplace/orders/123", {
@@ -26,9 +28,8 @@ const ProductPage = () => {
     fetchData();
   }, []);
 
-  console.log(productData)
-
   const handleClick = (action) => {
+    setIsDisabled(true)
     if (action === 'accept') {
       const acceptSale = async () => {
         const res = await fetch("https://eb863a74-7a4e-4daf-9540-d2db8470c18e.mock.pstmn.io/marketplace/orders/123/accept", {
@@ -66,12 +67,17 @@ const ProductPage = () => {
     <>
       <div className='product-page'>
         <div className='product-page-left'>
-          <img src={productData.listing.images[0].image.url} className='product-images'/>
+          {
+            productData.listing.images.map(imageOption => {
+              return (
+                <img src={imageOption.image.url} className='product-images' />
+              )
+            })
+          }
         </div>
 
         <div className='product-page-right'>
           <div className='breadcrumbs'>
-            {/* SHOP / {productData.listing.model.referenceNumber} */}
             <div className='breadcrumb1'>
               SHOP
             </div> / 
@@ -132,9 +138,9 @@ const ProductPage = () => {
           </div>
 
           <div className='button-container'>
-            <button className='button accept' onClick={() => handleClick('accept')}>Accept Sale</button>
-            <button className='button reject' onClick={() => handleClick('reject')}>Reject Sale</button>
-            <ActionModal productData={productData} confirmation={confirmation} handleClick={handleClick}/>
+            <button className='button accept' onClick={() => handleClick('accept')} disabled={isDisabled}>Accept Sale</button>
+            <button className='button reject' onClick={() => handleClick('reject')} disabled={isDisabled}>Reject Sale</button>
+            <ActionModal productData={productData} confirmation={confirmation} handleClick={handleClick} isDisabled={isDisabled} setIsDisabled={setIsDisabled}/>
             <div className='confirmation'>
               {confirmation}
             </div>
