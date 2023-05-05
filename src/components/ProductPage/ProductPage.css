@@ -113,3 +113,9 @@
 .spotlight-details {
   color: gray;
 }
+
+.confirmation {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}

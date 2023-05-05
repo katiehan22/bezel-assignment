@@ -1,8 +1,10 @@
 import './ProductPage.css';
 import { useEffect, useState } from "react";
+import ActionModal from '../ActionModal';
 
 const ProductPage = () => {
   const [productData, setProductData] = useState([]);
+  const [confirmation, setConfirmation] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,115 +28,147 @@ const ProductPage = () => {
 
   console.log(productData)
 
+  const handleClick = (action) => {
+    if (action === 'accept') {
+      const acceptSale = async () => {
+        const res = await fetch("https://eb863a74-7a4e-4daf-9540-d2db8470c18e.mock.pstmn.io/marketplace/orders/123/accept", {
+          method: 'POST'
+        });
+
+        if (res.ok) {
+          setConfirmation("You have accepted the sale! Check your email for a confirmation.")
+        } else {
+          setConfirmation("There was an error processing the sale. Please try again later.")
+        }
+      }
+      acceptSale();
+    } else {
+      const rejectSale = async () => {
+        const res = await fetch("https://eb863a74-7a4e-4daf-9540-d2db8470c18e.mock.pstmn.io/marketplace/orders/123/decline", {
+          method: 'POST'
+        });
+
+        if (res.ok) {
+          setConfirmation("You have rejected the sale. We will notify you if you receive another offer.")
+        } else {
+          setConfirmation("There was an error processing the sale. Please try again later.")
+        }
+      }
+      rejectSale();
+    }
+  }
+
   if(productData.length === 0) {
     return null;
   }
 
-  // if(productData.length > 0) {
-    return (
-      <>
-        <div className='product-page'>
-          <div className='product-page-left'>
-            <img src={productData.listing.images[0].image.url} className='product-images'/>
-          </div>
-
-          <div className='product-page-right'>
-            <div className='breadcrumbs'>
-              {/* SHOP / {productData.listing.model.referenceNumber} */}
-              <div className='breadcrumb1'>
-                SHOP
-              </div> / 
-              <div className='breadcrumb1'>
-                {productData.listing.model.referenceNumber}
-              </div>
-            </div>
-
-            <div className='product-name'>
-              {productData.listing.manufactureYear} {productData.listing.model.brand.name} {productData.listing.model.displayName}
-            </div>
-
-            <div className='product-price'>
-              ${(productData.salePriceCents / 100).toLocaleString("en-US")}
-            </div>
-
-            <div className='product-highlights'>
-              <div className='highlight-item'>
-                <div className='highlight-title'>
-                  CONDITION
-                </div>
-                <div className='highlight-detail'>
-                  {productData.listing.condition}
-                </div>
-              </div>
-              <div className='highlight-item'>
-                <div className='highlight-title'>
-                  BOX
-                </div>
-                <div className='highlight-detail'>
-                  YES
-                </div>
-              </div>
-              <div className='highlight-item'>
-                <div className='highlight-title'>
-                  PAPERS
-                </div>
-                <div className='highlight-detail'>
-                  YES
-                </div>
-              </div>
-              <div className='highlight-item'>
-                <div className='highlight-title'>
-                  YEAR
-                </div>
-                <div className='highlight-detail'>
-                  {productData.listing.manufactureYear}
-                </div>
-              </div>
-              <div className='highlight-item'>
-                <div className='highlight-title'>
-                  CASE SIZE
-                </div>
-                <div className='highlight-detail'>
-                  40mm
-                </div>
-              </div>
-            </div>
-
-            <div className='button-container'>
-              <button className='button accept'>Accept Sale</button>
-              <button className='button reject'>Reject Sale</button>
-            </div>
-
-            <div className='spotlight-item'>
-              <div className='spotlight-header'>
-                The Story
-              </div>
-              <div className='spotlight-details'>
-                {productData.listing.model.description}
-              </div>
-            </div>
-            <div className='spotlight-item'>
-              <div className='spotlight-header'>
-                Condition
-              </div>
-              <div className='spotlight-details'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </div>
-            </div>
-            <div className='spotlight-item'>
-              <div className='spotlight-header'>
-                Returns
-              </div>
-              <div className='spotlight-details'>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </div>
-            </div>
-
-          </div>
+  return (
+    <>
+      <div className='product-page'>
+        <div className='product-page-left'>
+          <img src={productData.listing.images[0].image.url} className='product-images'/>
         </div>
-      </>
-    )
-  // }
+
+        <div className='product-page-right'>
+          <div className='breadcrumbs'>
+            {/* SHOP / {productData.listing.model.referenceNumber} */}
+            <div className='breadcrumb1'>
+              SHOP
+            </div> / 
+            <div className='breadcrumb1'>
+              {productData.listing.model.referenceNumber}
+            </div>
+          </div>
+
+          <div className='product-name'>
+            {productData.listing.manufactureYear} {productData.listing.model.brand.name} {productData.listing.model.displayName}
+          </div>
+
+          <div className='product-price'>
+            ${(productData.salePriceCents / 100).toLocaleString("en-US")}
+          </div>
+
+          <div className='product-highlights'>
+            <div className='highlight-item'>
+              <div className='highlight-title'>
+                CONDITION
+              </div>
+              <div className='highlight-detail'>
+                {productData.listing.condition}
+              </div>
+            </div>
+            <div className='highlight-item'>
+              <div className='highlight-title'>
+                BOX
+              </div>
+              <div className='highlight-detail'>
+                YES
+              </div>
+            </div>
+            <div className='highlight-item'>
+              <div className='highlight-title'>
+                PAPERS
+              </div>
+              <div className='highlight-detail'>
+                YES
+              </div>
+            </div>
+            <div className='highlight-item'>
+              <div className='highlight-title'>
+                YEAR
+              </div>
+              <div className='highlight-detail'>
+                {productData.listing.manufactureYear}
+              </div>
+            </div>
+            <div className='highlight-item'>
+              <div className='highlight-title'>
+                CASE SIZE
+              </div>
+              <div className='highlight-detail'>
+                40mm
+              </div>
+            </div>
+          </div>
+
+          <div className='button-container'>
+            <button className='button accept' onClick={() => handleClick('accept')}>Accept Sale</button>
+            <button className='button reject' onClick={() => handleClick('reject')}>Reject Sale</button>
+            <ActionModal productData={productData} confirmation={confirmation} handleClick={handleClick}/>
+            <div className='confirmation'>
+              {confirmation}
+            </div>
+          </div>
+
+          <div className='spotlight-item'>
+            <div className='spotlight-header'>
+              The Story
+            </div>
+            <div className='spotlight-details'>
+              {productData.listing.model.description}
+            </div>
+          </div>
+          <div className='spotlight-item'>
+            <div className='spotlight-header'>
+              Condition
+            </div>
+            <div className='spotlight-details'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </div>
+          </div>
+          <div className='spotlight-item'>
+            <div className='spotlight-header'>
+              Returns
+            </div>
+            <div className='spotlight-details'>
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </>
+  )
 }
 
 export default ProductPage;
